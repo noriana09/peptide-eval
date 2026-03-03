@@ -55,7 +55,7 @@ Stability is computed using BioPython (ProteinAnalysis).
 
 ## Input
 
-A FASTA file containing peptide sequences, for example:
+A FASTA file containing peptide sequences.
 
 
 
