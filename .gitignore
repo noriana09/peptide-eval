@@ -10,11 +10,13 @@ __pycache__/
 .venv/
 venv/
 
-# Outputs / generated files
-outputs/
-*.csv
-*.fasta
-*.log
+# Outputs (ignore everything except final_results.csv)
+outputs/*
+!outputs/final_results.csv
+
+# Allow inputs folder
+!inputs/
+!inputs/*.fasta
 
 # Jupyter
 .ipynb_checkpoints/
