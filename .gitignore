@@ -22,6 +22,5 @@ outputs/*
 .ipynb_checkpoints/
 
 # Tools (usually large / external repos)
-# Αν θες να τα κρατήσεις στο GitHub, το αλλάζουμε μετά.
 tools/
 
