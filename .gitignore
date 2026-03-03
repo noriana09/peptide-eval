@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual env
+.venv/
+venv/
+
+# Outputs / generated files
+outputs/
+*.csv
+*.fasta
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tools (usually large / external repos)
+# Αν θες να τα κρατήσεις στο GitHub, το αλλάζουμε μετά.
+tools/
+
