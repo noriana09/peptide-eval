@@ -26,10 +26,7 @@ def main():
     fasta = args.fasta
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    
-    # ----------------------------------
-    # Clean previous output CSV files
-    # ----------------------------------
+
     files_to_clean = [
         out_dir / "results_amp.csv",
         out_dir / "results_soluble.csv",
@@ -85,9 +82,6 @@ def main():
          "--out_csv", str(final_csv)])
 
     
-    # ----------------------------------
-    # Remove intermediate CSV files
-    # ----------------------------------
     intermediate_files = [
         amp_csv,
         sol_csv,

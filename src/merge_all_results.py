@@ -30,9 +30,6 @@ def main():
     nontox = pd.read_csv(nontox_path)
     stab = pd.read_csv(stab_path)
 
-    # -------------------------
-    # Normalize columns (AMP)
-    # -------------------------
     if "AMP_prob" not in amp.columns and "probability" in amp.columns:
         amp = amp.rename(columns={"probability": "AMP_prob"})
     if "AMP" not in amp.columns and "Binary" in amp.columns:
@@ -40,9 +37,6 @@ def main():
     if "sequence" not in amp.columns and "Sequence" in amp.columns:
         amp = amp.rename(columns={"Sequence": "sequence"})
 
-    # -------------------------
-    # Normalize columns (SOL)
-    # -------------------------
     if "SOL_prob" not in sol.columns and "probability" in sol.columns:
         sol = sol.rename(columns={"probability": "SOL_prob"})
     if "SOL" not in sol.columns and "Binary" in sol.columns:
@@ -50,18 +44,12 @@ def main():
     if "sequence" not in sol.columns and "Sequence" in sol.columns:
         sol = sol.rename(columns={"Sequence": "sequence"})
 
-    # -------------------------
-    # Normalize columns (NON-TOX)
-    # -------------------------
     if "NON_TOX_prob" not in nontox.columns:
         raise ValueError("nontox csv must contain NON_TOX_prob")
     if "NON_TOX" not in nontox.columns:
         raise ValueError("nontox csv must contain NON_TOX")
 
-    # -------------------------
-    # Normalize columns (STABILITY)
-    # expecting: id, sequence, Stability_s, Stability
-    # -------------------------
+
     if "Stability_s" not in stab.columns and "STAB_index" in stab.columns:
         stab = stab.rename(columns={"STAB_index": "Stability_s"})
     if "Stability" not in stab.columns and "STABLE" in stab.columns:
@@ -72,9 +60,7 @@ def main():
             f"stability csv must contain Stability_s and Stability. Found: {list(stab.columns)}"
         )
 
-    # -------------------------
-    # Merge
-    # -------------------------
+
     df = amp.merge(sol, on=["id", "sequence"], how="inner")
     df = df.merge(nontox, on=["id", "sequence"], how="inner")
     df = df.merge(
@@ -91,9 +77,6 @@ def main():
         "SOL": "Solubility",
     })
 
-    # -------------------------
-    # Derived columns
-    # -------------------------
     # ALL = 1 when all binaries are 1
     df["ALL"] = (
         (df["AMP"] == 1) &
@@ -118,9 +101,7 @@ def main():
     ]
     df = df[keep]
 
-    # ---------------------------
-    # Add summary row at the end
-    # ---------------------------
+
     total_all = int((df["ALL"] == 1).sum())
     total_above = int((df["All above 0.95"] == 1).sum())
 
